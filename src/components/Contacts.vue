@@ -1,3 +1,122 @@
+<script setup>
+	import { ref, onMounted, onBeforeMount } from 'vue';
+
+	import { Notyf } from 'notyf';
+	import 'notyf/notyf.min.css';
+
+	const notyf = new Notyf();
+
+	const WEB3FORMS_ACCESS_KEY = "dd787d0f-eb30-4185-9354-4f13bb4211f7";
+
+	const subject = "New message from Portfolio Contact Form";
+
+	const name = ref("");
+	const email = ref("");
+	const message = ref("");
+
+	const isLoading = ref(false);
+
+
+	const submitForm = async() => {
+
+		if(!recaptchaToken.value) {
+			notyf.error('Please verify that you are not a robot.');
+			return;
+		}
+
+		isLoading.value = true;
+
+		try {
+
+			const response = await fetch("https://api.web3forms.com/submit", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/json"
+				},
+				body: JSON.stringify({
+					access_key: WEB3FORMS_ACCESS_KEY,
+					subject: subject,
+					name: name.value,
+					email: email.value,
+					message: message.value
+				})
+			});
+
+			const result = await response.json();
+
+			if(result.success) {
+				console.log(result)
+
+				isLoading.value = false;
+				notyf.success("Message sent!");
+			}
+
+		} catch(error) {
+			console.log(error);
+
+			isLoading.value = false;
+			notyf.error("Failed to send message");
+
+		} finally {
+
+			resetRecaptcha();
+		}
+	}
+
+	/*recaptcha integration*/
+
+	const SITE_KEY = '6LeLDPUsAAAAAL8HTPez4ll9xpGNF2DMLyjKdYGa';
+
+	const recaptchaContainer = ref(null);
+	const recaptchaWidgetId = ref(null);
+	const recaptchaToken = ref('');
+
+
+	function onRecaptchaSuccess(token) {
+		recaptchaToken.value = token;
+	}
+
+	function onRecaptchaExpired() {
+		recaptchaToken.value = '';
+	}
+
+	function renderRecaptcha() {
+		if(!window.grecaptcha) {
+			console.error('reCAPTCHA not loaded');
+			return;
+		}
+
+		recaptchaWidgetId.value = window.grecaptcha.render(recaptchaContainer.value, {
+			sitekey: SITE_KEY,
+			size: 'normal',
+			callback: onRecaptchaSuccess,
+			'expired-callback': onRecaptchaExpired
+		});
+	}
+
+	function resetRecaptcha() {
+		if(recaptchaWidgetId.value !== null) {
+			window.grecaptcha.reset(recaptchaWidgetId.value);
+			recaptchaToken.value = '';
+		}
+	}
+
+	onMounted(() => {
+		const interval = setInterval(() => {
+			if(window.grecaptcha && window.grecaptcha.render) {
+				renderRecaptcha();
+				clearInterval(interval)
+			}
+		}, 100);
+
+		onBeforeMount(() => {
+			clearInterval(interval);
+		});
+	})
+
+</script>
+
 <template>
     <!-- Contact Section Start -->
     <section id="contact">
@@ -12,15 +131,15 @@
                     <form class="form-text text-white">
                         
                         <div class="mb-3">
-                            <input type="text" class="form-control bg-black text-white border-0 py-3" placeholder="Name">
+                            <input type="text" v-model="name" class="form-control bg-black text-white border-0 py-3" placeholder="Name">
                         </div>
 
                         <div class="mb-3">
-                            <input type="email" class="form-control bg-black text-white border-0 py-3" placeholder="Email Address">
+                            <input type="email" v-model="email" class="form-control bg-black text-white border-0 py-3" placeholder="Email Address">
                         </div>
 
                         <div class="mb-3">
-                            <textarea class="form-control bg-black border-0 text-white py-3" rows="4" placeholder="Message"></textarea>
+                            <textarea v-model="message" class="form-control bg-black border-0 text-white py-3" rows="4" placeholder="Message"></textarea>
                         </div>
 
                         <div class="mt-4">
@@ -35,11 +154,15 @@
                                         <img src="https://www.svgrepo.com/show/494312/linkedin-rounded.svg" alt="LinkedIn" width="30">
                                     </a>
                                 </div>
+                                <button type="submit" class="btn btn-black bg-black px-5 py-2 fw-medium" :disabled="isLoading">{{isLoading ? "Sending..." : "Submit"}}</button>                               
+                            </div>    
 
-                                    <button type="submit" class="btn btn-black bg-black px-5 py-2 fw-medium">Submit</button>
-                                
-                            </div>
+                            <div class="d-flex justify-content-end mt-2">
+	                            <div ref="recaptchaContainer"></div>
+	                        </div>
+                            
                         </div>
+                        
 
                     </form>
                 </div>
