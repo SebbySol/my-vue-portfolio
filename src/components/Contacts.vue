@@ -1,0 +1,51 @@
+<template>
+    <!-- Contact Section Start -->
+    <section id="contact">
+        <div class="container">
+            <div class="row g-4 align-items-center"> <div class="col-md-6">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61753.23242953218!2d121.0846582273863!3d14.679929154400105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397bbd0422404fb%3A0xf369cca31a8be513!2sSan%20Mateo%2C%20Rizal!5e0!3m2!1sen!2sph!4v1775636880759!5m2!1sen!2sph" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+
+                <div class="col-md-6">
+                    <h1 class="text-black">Let's Connect</h1>
+
+                    <form class="form-text text-white">
+                        
+                        <div class="mb-3">
+                            <input type="text" class="form-control bg-black text-white border-0 py-3" placeholder="Name">
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="email" class="form-control bg-black text-white border-0 py-3" placeholder="Email Address">
+                        </div>
+
+                        <div class="mb-3">
+                            <textarea class="form-control bg-black border-0 text-white py-3" rows="4" placeholder="Message"></textarea>
+                        </div>
+
+                        <div class="mt-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                
+                                <div class="icons d-flex gap-3">
+                                    <a href="https://github.com/SebbySol" target="_blank">
+                                        <img src="https://www.svgrepo.com/show/330512/github.svg" alt="Github" width="30">
+                                    </a>
+
+                                    <a href="https://linkedin.com" target="_blank">
+                                        <img src="https://www.svgrepo.com/show/494312/linkedin-rounded.svg" alt="LinkedIn" width="30">
+                                    </a>
+                                </div>
+
+                                    <button type="submit" class="btn btn-black bg-black px-5 py-2 fw-medium">Submit</button>
+                                
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Contact Section Start -->
+</template>
