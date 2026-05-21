@@ -160,9 +160,8 @@
                             </div>    
 
                             <div class="d-flex justify-content-end mt-2">
-                                <div ref="recaptchaContainer" style="width: fit-content; max-width: 80%; overflow: hidden;">
+                                <div class="recaptcha-wrapper" ref="recaptchaContainer" style="width: fit-content; max-width: 80%; overflow: hidden;"></div>
                             </div>
-                        </div>
                             
                         </div>
                         
@@ -175,3 +174,9 @@
     </section>
     <!-- Contact Section Start -->
 </template>
+
+<style scoped>
+:deep(.recaptcha-wrapper iframe) {
+    border-radius: 0 !important;
+}
+</style>
