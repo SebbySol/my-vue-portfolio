@@ -6,7 +6,7 @@
 
 	const notyf = new Notyf();
 
-	const WEB3FORMS_ACCESS_KEY = "dd787d0f-eb30-4185-9354-4f13bb4211f7";
+	const WEB3FORMS_ACCESS_KEY = "5ad54b28-e4c9-46b1-a648-1028821df605";
 
 	const subject = "New message from Portfolio Contact Form";
 
@@ -66,7 +66,7 @@
 
 	/*recaptcha integration*/
 
-	const SITE_KEY = '6LeLDPUsAAAAAL8HTPez4ll9xpGNF2DMLyjKdYGa';
+	const SITE_KEY = '6LcFkvUsAAAAAGQ43qL6stLCaX23PCyQR7McMZjr';
 
 	const recaptchaContainer = ref(null);
 	const recaptchaWidgetId = ref(null);
@@ -121,7 +121,9 @@
     <!-- Contact Section Start -->
     <section id="contact">
         <div class="container">
-            <div class="row g-4 align-items-center"> <div class="col-md-6">
+            <div class="row g-4 align-items-center">
+
+                <div class="col-md-6">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d61753.23242953218!2d121.0846582273863!3d14.679929154400105!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397bbd0422404fb%3A0xf369cca31a8be513!2sSan%20Mateo%2C%20Rizal!5e0!3m2!1sen!2sph!4v1775636880759!5m2!1sen!2sph" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
@@ -158,8 +160,9 @@
                             </div>    
 
                             <div class="d-flex justify-content-end mt-2">
-	                            <div ref="recaptchaContainer"></div>
-	                        </div>
+                                <div ref="recaptchaContainer" style="width: fit-content; max-width: 80%; overflow: hidden;">
+                            </div>
+                        </div>
                             
                         </div>
                         
