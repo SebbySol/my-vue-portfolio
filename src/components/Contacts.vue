@@ -130,7 +130,7 @@
                 <div class="col-md-6">
                     <h1 class="text-black">Let's Connect</h1>
 
-                    <form class="form-text text-white">
+                    <form class="form-text text-white" @submit.prevent="submitForm">
                         
                         <div class="mb-3">
                             <input type="text" v-model="name" class="form-control bg-black text-white border-0 py-3" placeholder="Name">
@@ -176,7 +176,15 @@
 </template>
 
 <style scoped>
+
 :deep(.recaptcha-wrapper iframe) {
     border-radius: 0 !important;
 }
+
+:deep(input:-webkit-autofill), :deep(input:-webkit-autofill:hover), :deep(input:-webkit-autofill:focus) {
+    -webkit-box-shadow: 0 0 0px 1000px black inset !important;
+    -webkit-text-fill-color: white !important;
+    caret-color: white;
+}
+
 </style>
